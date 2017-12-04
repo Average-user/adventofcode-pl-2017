@@ -11,7 +11,8 @@ sum(XS, S) :-
   sumH(XS, S2), last(XS, L), XS = [H|_],
   (L = H -> S is L + S2 ; S is S2).
 
-partA(S) :- from_file("Data/day1.txt", F), sum(F, S).
+% Part 1.A solution
+partA(S) :- from_file("Inputs/day1.txt", F), sum(F, S).
 
 
 elemIndex(I, XS, E) :- length(XS, L), I2 is I mod L, elemIndexH(I2, XS, E).
@@ -29,10 +30,10 @@ sum2(XS, S) :- length(XS, L), L1 is L-1, numlist(0, L1, R),
   findall(X, (member(X, R), containsS(XS, X)), Ixs),
   findall(X, (member(Z, Ixs), elemIndex(Z, XS, X)), Es), sum2H(Es, S).
 
+% Part 1.B solution
+partB(S) :- from_file("Inputs/day1.txt", F), sum2(F, S).
 
-partB(S) :- from_file("Data/day1.txt", F), sum2(F, S).
-
-% main
+% Complete Day 1 solution.
 main((A,B)) :- partA(A), !, partB(B), !.
 
 %% Reading File (formating the input)

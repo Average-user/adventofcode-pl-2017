@@ -6,15 +6,17 @@ sum([H|T], S) :- sum(T, S2), S is S2+H.
 
 dif(XS, X) :- max(XS, Ma), min(XS, Mi), X is Ma-Mi.
 
-partA(S) :- from_file("Data/day2.txt", A), maplist(dif, A, B), sum(B, S).
+% Part 2.A solution
+partA(S) :- from_file("Inputs/day2.txt", A), maplist(dif, A, B), sum(B, S).
 
 
 evenlyDiv(XS, R) :-
   member(A, XS), member(B, XS), not(A=B), Z is A mod B, Z =:= 0, R is A div B.
 
-partB(S) :- from_file("Data/day2.txt", A), maplist(evenlyDiv, A, B), sum(B, S).
+% Part 2.B solution.
+partB(S) :- from_file("Inputs/day2.txt", A), maplist(evenlyDiv, A, B), sum(B, S).
 
-% main
+% Complete Day 2 solution.
 main((A,B)) :- partA(A), !, partB(B), !.
 
 %% Reading File (formating the input)

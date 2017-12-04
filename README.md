@@ -1,7 +1,7 @@
 ## AdventOfCode 2017 in Prolog. (SWI-Prolog 7.2.3)
 
 #### Project structure:
-For every ```src/dayX.pl``` will be a ```src/Data/dayX.txt``` in where the
+For every ```src/dayX.pl``` will be a ```src/Inputs/dayX.txt``` in where the
 puzzle input would be stored.
 
 #### Usage
@@ -27,7 +27,7 @@ Where A is the solution to the first Part of the day, and B the solution of the
 second.
 
 And if you want to see how it works with your input, just replace the
-correspondent ```Data/dayX.txt``` with your input, following the given format.
+correspondent ```Inputs/dayX.txt``` with your input, following the given format.
 
 #### [License](https://github.com/Average-user/adventofcode-pl-2017/blob/master/LICENSE)
 ```

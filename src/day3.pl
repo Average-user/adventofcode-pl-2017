@@ -21,7 +21,8 @@ distanceX(N, D) :-
 
 distance(N, D) :- distanceX(N, X), distanceY(N, Y), D is Y+X.
 
-partA(X) :- from_file("Data/day3.txt", N), distance(N, X).
+% Part 3.A solution
+partA(X) :- from_file("Inputs/day3.txt", N), distance(N, X).
 
 %% Reading File (formating the input)
 from_file(Path, F) :- open(Path,read,A), read_string(A,_,X),
