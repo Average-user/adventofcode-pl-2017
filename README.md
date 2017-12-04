@@ -1,11 +1,13 @@
-# AdventOfCode 2017 in Prolog. (SWI-Prolog 7.2.3)
+## AdventOfCode 2017 in Prolog. (SWI-Prolog 7.2.3)
 
-**Solutions to AoC puzzles in Prolog:** For every ```src/dayX.pl``` will be a
-```src/Data/dayX.txt``` where the puzzle input would be stored.
+#### Project structure:
+For every ```src/dayX.pl``` will be a ```src/Data/dayX.txt``` in where the
+puzzle input would be stored.
 
+#### Usage
 In order to see what are the solutions for one puzzle follow this example:
-(make sure you are inside the ```src``` folder).
 
+Make sure you are inside the ```src``` folder, and:
 ```
 src$ prolog
 ...
@@ -27,7 +29,7 @@ second.
 And if you want to see how it works with your input, just replace the
 correspondent ```Data/dayX.txt``` with your input, following the given format.
 
-### [License](https://github.com/Average-user/adventofcode-pl-2017/blob/master/LICENSE)
+#### [License](https://github.com/Average-user/adventofcode-pl-2017/blob/master/LICENSE)
 ```
 MIT License
 
