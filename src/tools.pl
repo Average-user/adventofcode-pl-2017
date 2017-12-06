@@ -3,7 +3,12 @@
                   string_to_number/2,
                   split_spaces/2,
                   split_tabs/2,
-                  map_to_numbers/2]).
+                  map_to_numbers/2,
+                  zip_index/2,
+                  zip/3,
+                  snd/2,
+                  fst/2,
+                  splitAt/4]).
 
 file_to_lines(Path, Lines) :-
   open(Path, read, File),
@@ -17,3 +22,19 @@ map_to_numbers(XS, YS) :- maplist(string_to_number, XS, YS).
 
 split_spaces(S, XS) :- split_string(S, " ", " ", XS).
 split_tabs(S, XS) :- split_string(S, "\t", "\t", XS).
+splitAt(XS, N, L1, L2) :- length(L1, N), append(L1, L2, XS).
+
+zip_index(XS, YS) :-
+  length(XS, L),
+  L1 is L-1,
+  numlist(0,L1,NS),
+  zip(NS, XS, YS).
+
+zip([],      _,       []) :- !.
+zip(_,       [],      []) :- !.
+zip([H1|T1], [H2|T2], YS) :-
+  zip(T1, T2, YS1),
+  YS = [(H1, H2) | YS1].
+
+snd((_, Y), Y).
+fst((X, _), X).
