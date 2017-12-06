@@ -1,3 +1,5 @@
+:- use_module(tools).
+
 filter([], []).
 filter([H|T], R) :-
   list_to_set(H, H) -> filter(T, R1), R = [H|R1] ; filter(T, R).
@@ -24,9 +26,5 @@ main((A,B)) :- partA(A), partB(B).
 
 %% Reading File (formating the input)
 from_file(Path, F) :-
-  read_file(Path, A), split_string(A, "\n", "", B),
-  maplist(split_word, B, F1), select([""], F1, F).
-
-split_word(X, B) :- split_string(X, " ", "", B).
-
-read_file(P,X) :- open(P,read,A), read_string(A,_,X).
+  file_to_lines(Path, Lines),
+  maplist(split_spaces, Lines, F).

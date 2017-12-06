@@ -1,3 +1,5 @@
+:- use_module(tools).
+
 modifyA([H|T], 0, [H1|T], H) :- H1 is H+1, !.
 modifyA([H|T], N, XS,     X) :- N1 is N-1, modifyA(T, N1, XS1, X), XS = [H|XS1].
 
@@ -32,9 +34,5 @@ partB(B) :- from_file("Inputs/day5.txt", I), changesB(I, 0, 1, B).
 
 %% Reading File (formating the input)
 from_file(Path, F) :-
-  read_file(Path, A), split_string(A, "\n", "", Lines),
-  maplist(atom_codes, Lines, L),
-  select([], L, F1), maplist(to_numbers,F1,F).
-
-to_numbers(A,B) :- number_codes(B,A).
-read_file(P,X) :- open(P,read,A), read_string(A,_,X).
+  file_to_lines(Path, Lines),
+  maplist(flip(number_codes), Lines, F).

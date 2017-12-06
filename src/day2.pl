@@ -1,3 +1,5 @@
+:- use_module(tools).
+
 max(XS, M) :- member(M, XS), select(M, XS, YS), forall(member(Y, YS), Y =< M).
 min(XS, M) :- member(M, XS), select(M, XS, YS), forall(member(Y, YS), Y >= M).
 
@@ -21,11 +23,6 @@ main((A,B)) :- partA(A), !, partB(B), !.
 
 %% Reading File (formating the input)
 from_file(Path, F) :-
-  read_file(Path, A), split_string(A, "\n", "", B), last(B, L), select(L, B, C),
-  maplist(split_numbers, C, F).
-
-split_numbers(String, R) :-
-  split_string(String, "\t", "", A), maplist(string_to_number, A, R).
-
-read_file(P,X) :- open(P,read,A), read_string(A,_,X).
-string_to_number(S,N) :- atom_codes(S, C), number_codes(N, C).
+  file_to_lines(Path, Lines),
+  maplist(split_tabs, Lines, Lists),
+  maplist(map_to_numbers, Lists, F).

@@ -1,3 +1,5 @@
+:- use_module(tools).
+
 ring(N, R) :- A is sqrt(N), B is (A+1) / 2, floor(B, C),
               (B =:= C -> R is C ; R is C+1).
 
@@ -25,5 +27,6 @@ distance(N, D) :- distanceX(N, X), distanceY(N, Y), D is Y+X.
 partA(X) :- from_file("Inputs/day3.txt", N), distance(N, X).
 
 %% Reading File (formating the input)
-from_file(Path, F) :- open(Path,read,A), read_string(A,_,X),
-  atom_codes(X, F1), select(10, F1, F2), number_codes(F, F2).
+from_file(Path, F) :-
+  file_to_lines(Path, [N|_]),
+  string_to_number(N, F).

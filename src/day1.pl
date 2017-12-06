@@ -37,6 +37,7 @@ partB(S) :- from_file("Inputs/day1.txt", F), sum2(F, S).
 main((A,B)) :- partA(A), !, partB(B), !.
 
 %% Reading File (formating the input)
-from_file(P,R) :-
-  open(P,read,Stream), read_string(Stream,_, X),
-  atom_codes(X, C), select(10, C, R1), maplist(digit, R1, R).
+from_file(Path, F) :-
+  file_to_lines(Path, [N|_]),
+  atom_codes(N, Codes),
+  maplist(digit, Codes, F).
