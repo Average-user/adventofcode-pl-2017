@@ -2,7 +2,7 @@
 
 #### Project structure:
 For every ```src/dayX.pl``` will be a ```src/Inputs/dayX.txt``` in where the
-puzzle input would be stored. Also, some commonly used code will be stored in ```src/tools.pl```. 
+puzzle input would be stored. Also, some commonly used code will be stored in ```src/tools.pl```.
 
 #### Usage
 In order to see what are the solutions for one puzzle follow this example:
@@ -17,8 +17,6 @@ true.
 ?- main((A,B)).
 A = 1216,
 B = 1072.
-
-?-
 ```
 Where A is the solution to the first Part of the day, and B the solution of the
 second.
