@@ -8,7 +8,8 @@
                   zip/3,
                   snd/2,
                   fst/2,
-                  splitAt/4]).
+                  splitAt/4,
+                  sum/2]).
 
 file_to_lines(Path, Lines) :-
   open(Path, read, File),
@@ -38,3 +39,7 @@ zip([H1|T1], [H2|T2], YS) :-
 
 snd((_, Y), Y).
 fst((X, _), X).
+
+sum([]   , 0) :- !.
+sum([H|T], N) :-
+  sum(T, N1), N is H+N1.
