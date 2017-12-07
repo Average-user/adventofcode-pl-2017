@@ -33,6 +33,7 @@ loop(XS, XSS, R) :-
 
 run(X, S) :- zip_index(X, XS),  loop(XS, [], S).
 
+% Part 6.A
 partA(A) :-
   from_file("Inputs/day6.txt", F),
   run(F, X),
@@ -41,6 +42,7 @@ partA(A) :-
 dropWhileB([X|T], X, [X|T]) :- !.
 dropWhileB([_|T], X, XS) :- dropWhileB(T, X, XS).
 
+% Part 6.B
 partB(B) :-
   from_file("Inputs/day6.txt", F),
   run(F, [H|T]),
@@ -48,6 +50,7 @@ partB(B) :-
   dropWhileB(X, H, Cycle),
   length(Cycle, B).
 
+% Complete day 6 solution
 main((A,B)) :-
   from_file("Inputs/day6.txt", F),
   run(F, [H|T]),

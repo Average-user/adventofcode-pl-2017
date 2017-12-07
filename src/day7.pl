@@ -24,6 +24,7 @@ find_bottom(XS, Bottom) :-
   member(p(Bottom, _, _), XS),
   not(member(Bottom, SP)).
 
+% Part 7.A solution
 partA(A) :- from_file("Inputs/day7.txt", F), find_bottom(F, A), !.
 
 
@@ -68,8 +69,10 @@ new_weight(XS, Weight) :-
   member(p(P, N, _), XS),
   Weight is N+D.
 
+% part 7.B solution
 partB(B) :- from_file("Inputs/day7.txt", F), new_weight(F, B), !.
 
+% complete day 7 solution
 main((A,B)) :- partA(A), partB(B).
 
 %% Reading File (formating the input)
