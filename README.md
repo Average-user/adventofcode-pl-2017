@@ -24,7 +24,7 @@ second.
 If you want to see how it works with your input, just replace the
 correspondent ```Inputs/dayX.txt``` with your input, following the given format.
 
-### Missing Stuff
+#### Missing Stuff
 -   [Day 3, part B](https://github.com/Average-user/adventofcode-pl-2017/blob/master/src/day3.pl).
 -   [Day 5, part B](https://github.com/Average-user/adventofcode-pl-2017/blob/master/src/day5.pl).
 
