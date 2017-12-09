@@ -7,8 +7,8 @@ filter([H|T], R) :-
     R = [H|R1]
     ; filter(T, R).
 
-% Parta 4.A solution
-partA(X) :- from_file("Inputs/day4.txt", F), filter(F, Fi), length(Fi, X).
+% Day 4.A solution
+day04a(X) :- from_file("Inputs/day4.txt", F), filter(F, Fi), length(Fi, X).
 
 
 anagram(X, XS) :-
@@ -27,11 +27,8 @@ filter2([H|T], R) :-
   -> filter2(T, R1), R = [H|R1]
   ;  filter2(T, R).
 
-% Part 4.B solution
-partB(X) :- from_file("Inputs/day4.txt", F), filter2(F, Fi), length(Fi, X).
-
-%%  Comlplete Day4 solution.
-main((A,B)) :- partA(A), partB(B).
+% Day 4.B solution
+day04b(X) :- from_file("Inputs/day4.txt", F), filter2(F, Fi), length(Fi, X).
 
 %% Reading File (formating the input)
 from_file(Path, F) :-

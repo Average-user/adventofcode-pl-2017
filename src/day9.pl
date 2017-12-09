@@ -40,8 +40,8 @@ sum_gps(Xs, A, S) :-
           ; A1 is A+C,
             sum_gps(Nxs, A1, S)).
 
-% Part 9.A solution
-partA(A) :-
+% Day 9.A solution
+day09a(A) :-
   from_file("Inputs/day9.txt", F),
   ignore_stuff(F, Is),
   erase_garbage(Is, f, Gs),
@@ -58,14 +58,11 @@ count_garbage([H|T], t, C, S) :-
               ; C1 is C+1,
                 count_garbage(T, t, C1, S).
 
-% Part 9.B solution.
-partB(B) :-
+% Day 9.B solution.
+day09b(B) :-
   from_file("Inputs/day9.txt", F),
   ignore_stuff(F, Is),
   count_garbage(Is, f, 0, B), !.
-
-% complete Day 9 solution.
-main((A, B)) :- partA(A), partB(B).
 
 %% Reading File (formating the input)
 from_file(Path, F) :-

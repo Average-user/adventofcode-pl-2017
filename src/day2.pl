@@ -5,8 +5,8 @@ min(XS, M) :- member(M, XS), select(M, XS, YS), forall(member(Y, YS), Y >= M).
 
 dif(XS, X) :- max(XS, Ma), min(XS, Mi), X is Ma-Mi.
 
-% Part 2.A solution
-partA(S) :- from_file("Inputs/day2.txt", A), maplist(dif, A, B), sum(B, S), !.
+% Day 2.A solution
+day02a(S) :- from_file("Inputs/day2.txt", A), maplist(dif, A, B), sum(B, S), !.
 
 
 evenlyDiv(XS, R) :-
@@ -17,14 +17,11 @@ evenlyDiv(XS, R) :-
   Z =:= 0,
   R is A div B.
 
-% Part 2.B solution.
-partB(S) :-
+% Day 2.B solution.
+day02b(S) :-
   from_file("Inputs/day2.txt", A),
   maplist(evenlyDiv, A, B),
   sum(B, S), !.
-
-% Complete Day 2 solution.
-main((A,B)) :- partA(A), partB(B).
 
 %% Reading File (formating the input)
 from_file(Path, F) :-

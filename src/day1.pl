@@ -17,8 +17,8 @@ sumA(XS, S) :-
   (L = H -> S is L + S2 ;
    S is S2).
 
-% Part 1.A solution
-partA(S) :- from_file("Inputs/day1.txt", F), sumA(F, S).
+% Day 1.A solution
+day01a(S) :- from_file("Inputs/day1.txt", F), sumA(F, S), !.
 
 
 elemIndex(I, XS, E) :-
@@ -49,11 +49,8 @@ sum2(XS, S) :-
   findall(X, (member(Z, Ixs), elemIndex(Z, XS, X)), Es),
   sum2H(Es, S).
 
-% Part 1.B solution
-partB(S) :- from_file("Inputs/day1.txt", F), sum2(F, S).
-
-% Complete Day 1 solution.
-main((A,B)) :- partA(A), !, partB(B), !.
+% Day 1.B solution
+day01b(S) :- from_file("Inputs/day1.txt", F), sum2(F, S), !.
 
 %% Reading File (formating the input)
 from_file(Path, F) :-

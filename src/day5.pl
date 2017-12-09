@@ -16,14 +16,14 @@ changesA(XS, I, AC, Z) :-
   changesA(NXS, NI, AC1, Z), !;
   Z is AC-1.
 
-% | Part 5.A solution.
+% | Day 5.A solution.
 %   | This tooks about 4-5 minutes in my machine :(
 %   | But I couldn't find any mutable or with better index acces
 %   | container in Prolog.
-partA(A) :- from_file("Inputs/day5.txt", I), changesA(I, 0, 1, A).
+day05a(A) :- from_file("Inputs/day5.txt", I), changesA(I, 0, 1, A).
 
 
-/* | For PartB It would be definetively necesary to use a better container
+/* | For Day 5.B It would be definetively necesary to use a better container
    | than lists, since this goes out of stack really fast.
    | I tried increasing the stack, but after being running partB for a while,
    | my computer got freezed and I had to reboot it                           */

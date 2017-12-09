@@ -1,36 +1,5 @@
 :- use_module(tools).
 
-infix(A, B) :-
-  append(X, _, A),
-  append(_, B, X), !.
-
-fun_of(XS, F) :-
-  atom_codes('inc', I),
-  infix(XS, I) -> F = inc ;
-   F = dec.
-
-condition_of(XS, C) :-
-  atom_codes('<',  Less),
-  atom_codes('>',  More),
-  atom_codes('==', Eq),
-  atom_codes('!=', Dif),
-  atom_codes('>=', MoreEq),
-  atom_codes('<=', LessEq),
-  (infix(XS, Eq)     -> C = '==' ;
-   infix(XS, Dif)    -> C = '!=' ;
-   infix(XS, MoreEq) -> C = '>=' ;
-   infix(XS, LessEq) -> C = '<=' ;
-   infix(XS, Less)   -> C = '<'  ;
-   infix(XS, More)   -> C = '>').
-
-fromatI(Xs, i(A, Fun, B, C, Cond, D)) :-
-  atom_codes(Xs, Codes),
-  fun_of(Codes, Fun),
-  split_spaces(Xs, [A|[_,B1,_,C,_,D1]]),
-  condition_of(Codes, Cond),
-  atom_number(B1, B),
-  atom_number(D1, D).
-
 all_vars(Xs, Vs) :-
   findall((V, 0), member(i(V, _, _, _, _, _), Xs), Vs1),
   list_to_set(Vs1, Vs).
@@ -71,25 +40,53 @@ run2(Vars, [E|Exps], AC, RVars, RAC) :-
   NAC = [M|AC],
   run2(NVars, Exps, NAC, RVars, RAC).
 
-% Part 8.A solution
-partA(A) :-
+% Day 8.A solution
+day08a(A) :-
   from_file("Inputs/day8.txt", F),
   all_vars(F, Vars),
   run(Vars, F, NVars),
   maplist(snd, NVars, Ns),
   max_list(Ns, A), !.
 
-% Part 8.B solution
-partB(B) :-
+% Day 8.B solution
+day08b(B) :-
   from_file("Inputs/day8.txt", F),
   all_vars(F, Vars),
   run2(Vars, F, [], _, AC),
   max_list(AC, B), !.
 
-% Complete Day 8 solution
-main((A, B)) :- partA(A), partB(B).
-
 %% Reading File (formating the input)
 from_file(Path, F) :-
   file_to_lines(Path, Lines),
   maplist(fromatI, Lines, F).
+
+infix(A, B) :-
+  append(X, _, A),
+  append(_, B, X), !.
+
+fun_of(XS, F) :-
+  atom_codes('inc', I),
+  infix(XS, I) -> F = inc ;
+   F = dec.
+
+condition_of(XS, C) :-
+  atom_codes('<',  Less),
+  atom_codes('>',  More),
+  atom_codes('==', Eq),
+  atom_codes('!=', Dif),
+  atom_codes('>=', MoreEq),
+  atom_codes('<=', LessEq),
+  (infix(XS, Eq)     -> C = '==' ;
+   infix(XS, Dif)    -> C = '!=' ;
+   infix(XS, MoreEq) -> C = '>=' ;
+   infix(XS, LessEq) -> C = '<=' ;
+   infix(XS, Less)   -> C = '<'  ;
+   infix(XS, More)   -> C = '>').
+
+fromatI(Xs, i(A, Fun, B, C, Cond, D)) :-
+  atom_codes(Xs, Codes),
+  fun_of(Codes, Fun),
+  split_spaces(Xs, [A|[_,B1,_,C,_,D1]]),
+  condition_of(Codes, Cond),
+  atom_number(B1, B),
+  atom_number(D1, D).

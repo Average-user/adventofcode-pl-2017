@@ -1,18 +1,5 @@
 :- use_module(tools).
 
-formatS(String, p(Name, N, Program)) :-
-  split_string(String, "(", "(", [Name1,R]),
-  string_to_list(Name1, NL),
-  select(32, NL, NL2),
-  string_to_list(Name, NL2),
-  split_string(R, ")", ")", [NS|R2]),
-  number_codes(N, NS),
-  (R2 = [] -> Program = nil;
-   R2 = [R2H|_],
-   string_to_list(R2H, [_,_,_,_|P]),
-   string_to_list(P2, P),
-   split_string(P2, ", ", ", ", Program)).
-
 sub_program(p(_,_,P), P).
 
 sub_programs(XS, Prs) :-
@@ -24,8 +11,8 @@ find_bottom(XS, Bottom) :-
   member(p(Bottom, _, _), XS),
   not(member(Bottom, SP)).
 
-% Part 7.A solution
-partA(A) :- from_file("Inputs/day7.txt", F), find_bottom(F, A), !.
+% Day 7.A solution
+day07a(A) :- from_file("Inputs/day7.txt", F), find_bottom(F, A), !.
 
 
 total_weight(XS, Name, S) :-
@@ -69,13 +56,23 @@ new_weight(XS, Weight) :-
   member(p(P, N, _), XS),
   Weight is N+D.
 
-% part 7.B solution
-partB(B) :- from_file("Inputs/day7.txt", F), new_weight(F, B), !.
-
-% complete day 7 solution
-main((A,B)) :- partA(A), partB(B).
+% Day 7.B solution
+day07b(B) :- from_file("Inputs/day7.txt", F), new_weight(F, B), !.
 
 %% Reading File (formating the input)
 from_file(Path, F) :-
   file_to_lines(Path, Lines),
   maplist(formatS, Lines, F), !.
+
+formatS(String, p(Name, N, Program)) :-
+  split_string(String, "(", "(", [Name1,R]),
+  string_to_list(Name1, NL),
+  select(32, NL, NL2),
+  string_to_list(Name, NL2),
+  split_string(R, ")", ")", [NS|R2]),
+  number_codes(N, NS),
+  (R2 = [] -> Program = nil;
+   R2 = [R2H|_],
+   string_to_list(R2H, [_,_,_,_|P]),
+   string_to_list(P2, P),
+   split_string(P2, ", ", ", ", Program)).
