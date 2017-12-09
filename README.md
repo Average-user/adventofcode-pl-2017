@@ -14,13 +14,10 @@ src$ prolog
 ?-  [day1].
 true.
 
-?- main((A,B)).
+?- day01a(A), day01b(B).
 A = 1216,
 B = 1072.
 ```
-Where A is the solution to the first Part of the day, and B the solution of the
-second.
-
 If you want to see how it works with your input, just replace the
 correspondent ```Inputs/dayX.txt``` with your input, following the given format.
 
