@@ -28,6 +28,7 @@ sequence1 = run(lengths1, 1)
 sequence2 = run(lengths2, 1)
 print(sequence2)
 
+
 hashstr = ""
 for i in range(len(sequence2) // 16):
     num = 0
@@ -35,5 +36,6 @@ for i in range(len(sequence2) // 16):
         num ^= sequence2[i * 16 + j]
     hashstr += hex(num)[2:].zfill(2)
 
+print l
 print(sequence1[0] * sequence1[1])
 print(hashstr)
