@@ -9,7 +9,8 @@
                   snd/2,
                   fst/2,
                   splitAt/4,
-                  sum/2]).
+                  sum/2,
+                  to_bin/2]).
 
 file_to_lines(Path, Lines) :-
   open(Path, read, File),
@@ -43,3 +44,6 @@ fst((X, _), X).
 sum([]   , 0) :- !.
 sum([H|T], N) :-
   sum(T, N1), N is H+N1.
+
+to_bin(0, []) :- !.
+to_bin(N, Xs) :- A is N mod 2, B is N div 2, to_bin(B, Zs), Xs = [A|Zs].

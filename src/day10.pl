@@ -41,8 +41,6 @@ day10a(A) :-
   process(Xs, F, 0, 0, F, 1, [X,Y|_]),
   A is X*Y.
 
-to_bin(0, []) :- !.
-to_bin(N, Xs) :- A is N mod 2, B is N div 2, to_bin(B, Zs), Xs = [A|Zs].
 
 xor([], [],       []) :- !.
 xor([], [A|T]   , Xs) :- xor([], T, Xs1), Xs = [A|Xs1], !.
