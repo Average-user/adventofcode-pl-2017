@@ -1,6 +1,6 @@
 :- use_module(tools).
 
-distance([], X, X) :- !.
+distance([],    X,          X)  :- !.
 distance([n|T], v(X, Y, Z), Vs) :-
   Y1 is Y+1, Z1 is Z-1, distance(T, v(X, Y1, Z1), Vs), !.
 distance([s|T], v(X, Y, Z), Vs) :-
@@ -20,43 +20,20 @@ day11a(A) :-
   A is (abs(X)+abs(Y)+abs(Z)) div 2.
 
 
-maxdis([], _, Ac, Ac) :- !.
+new_coor(n , 0, 1, -1).
+new_coor(s , 0, -1, 1).
+new_coor(ne, 1, 0, -1).
+new_coor(sw, -1, 0, 1).
+new_coor(nw, -1, 1, 0).
+new_coor(se, 1, -1, 0).
 
-maxdis([n|T], v(X, Y, Z), Ac, Vs) :-
-  Y1 is Y+1, Z1 is Z-1,
-  A is (abs(X)+abs(Y1)+abs(Z1)) div 2,
-  Ac1 = [A|Ac],
-  maxdis(T, v(X, Y1, Z1), Ac1, Vs), !.
-
-maxdis([s|T], v(X, Y, Z), Ac, Vs) :-
-  Y1 is Y-1, Z1 is Z+1,
-  A is (abs(X)+abs(Y1)+abs(Z1)) div 2,
-  Ac1 = [A|Ac],
-  maxdis(T, v(X, Y1, Z1), Ac1, Vs), !.
-
-maxdis([ne|T], v(X, Y, Z), Ac, Vs) :-
-  X1 is X+1, Z1 is Z-1,
-  A is (abs(X1)+abs(Y)+abs(Z1)) div 2,
-  Ac1 = [A|Ac],
-  maxdis(T, v(X1, Y, Z1), Ac1, Vs), !.
-
-maxdis([sw|T], v(X, Y, Z), Ac, Vs) :-
-  X1 is X-1, Z1 is Z+1,
-  A is (abs(X1)+abs(Y)+abs(Z1)) div 2,
-  Ac1 = [A|Ac],
-  maxdis(T, v(X1, Y, Z1), Ac1, Vs), !.
-
-maxdis([nw|T], v(X, Y, Z), Ac, Vs) :-
-  X1 is X-1, Y1 is Y+1,
-  A is (abs(X1)+abs(Y1)+abs(Z)) div 2,
-  Ac1 = [A|Ac],
-  maxdis(T, v(X1, Y1, Z), Ac1, Vs), !.
-
-maxdis([se|T], v(X, Y, Z), Ac, Vs) :-
-  X1 is X+1, Y1 is Y-1,
-  A is (abs(X1)+abs(Y1)+abs(Z)) div 2,
-  Ac1 = [A|Ac],
-  maxdis(T, v(X1, Y1, Z), Ac1, Vs), !.
+maxdis([],    _,          Ac, Ac) :- !.
+maxdis([E|T], v(X, Y, Z), Ac, Vs) :-
+  new_coor(E, A, B, C),
+  NX is X+A, NY is Y+B, NZ is Z+C,
+  AE is (abs(NX)+abs(NY)+abs(NZ)) div 2,
+  Ac1 = [AE|Ac],
+  maxdis(T, v(NX, NY, NZ), Ac1, Vs), !.
 
 day11b(B) :-
   from_file("Inputs/day11.txt", F),
