@@ -13,7 +13,7 @@ not_caught_at(Delay, (D, R)) :- X is (Delay+D) mod (2*(R-1)), not(X = 0).
 
 find_delay(N, Layers, X) :-
   maplist(not_caught_at(N), Layers), X = N, !;
-  N1 is N+1, find_delay(N1, Layers, X).
+  succ(N, N1), find_delay(N1, Layers, X).
 
 day13b(B) :- from_file("Inputs/day13.txt", Layers), find_delay(0, Layers, B).
 
