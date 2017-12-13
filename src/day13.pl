@@ -1,3 +1,5 @@
+:- use_module(tools).
+
 go_trough([],           0) :- !.
 go_trough([(D, R)|T],   S) :-
   go_trough(T, S1),
@@ -7,7 +9,7 @@ go_trough([(D, R)|T],   S) :-
 day13a(A) :- from_file("Inputs/day13.txt", Layers), go_trough(Layers, A).
 
 
-not_caught_at(Delay, (D, R)) :- Z is Delay+D, X is Z mod (2*(R-1)), not(X = 0).
+not_caught_at(Delay, (D, R)) :- X is (Delay+D) mod (2*(R-1)), not(X = 0).
 
 find_delay(N, Layers, X) :-
   maplist(not_caught_at(N), Layers), X = N, !;
