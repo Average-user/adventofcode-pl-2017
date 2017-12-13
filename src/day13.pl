@@ -14,13 +14,23 @@ go_trough([(D, R, H, _)|Layers], Ac, NAc) :-
   go_trough(NLayers, Ac1, NAc).
 
 multiply([],        0) :- !.
-multiply([(A,B)|T], X) :-
-  multiply(T, N), X is N+(A*B).
+multiply([(A,B)|T], X) :- multiply(T, N), X is N+(A*B).
 
 day13a(A) :-
   from_file("Inputs/day13.txt", Layers),
   go_trough(Layers, [], Seen),
   multiply(Seen, A), !.
+
+not_caught_at(Delay, (R, D)) :- Z is Delay+D, X is Z mod (2*R), not(X = 0).
+
+find_delay(N, Layers, X) :-
+  maplist(not_caught_at(N), Layers), X = N, !;
+  N1 is N+1, find_delay(N1, Layers, X).
+
+day13b(B) :-
+  from_file("Inputs/day13.txt", Layers),
+  findall(X, (member((D, R, _, _), Layers), not(R = nil), X = (R, D)), Layers1),
+  find_delay(0, Layers1, B).
 
 %% Reading File (formating the input)
 from_file(Path, F) :-
