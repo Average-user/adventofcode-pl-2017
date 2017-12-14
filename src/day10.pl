@@ -42,20 +42,6 @@ day10a(A) :-
   A is X*Y.
 
 
-xor([], [],       []) :- !.
-xor([], [A|T]   , Xs) :- xor([], T, Xs1), Xs = [A|Xs1], !.
-xor([A|T], []   , Xs) :- xor(T, [], Xs1), Xs = [A|Xs1], !.
-xor([0|A], [0|B], Xs) :- xor(B, A, Xs1),  Xs = [0|Xs1], !.
-xor([0|A], [1|B], Xs) :- xor(A, B, Xs1),  Xs = [1|Xs1], !.
-xor([1|A], [0|B], Xs) :- xor(A, B, Xs1),  Xs = [1|Xs1], !.
-xor([1|A], [1|B], Xs) :- xor(A, B, Xs1),  Xs = [0|Xs1], !.
-
-xor_dec(A, B, C) :- to_bin(A, BA), to_bin(B, BB), xor(BA, BB, X), to_dec(X, C).
-
-to_dec([],    0) :- !.
-to_dec([H|T], X) :-
-  to_dec(T, X1), X is H+(2*X1).
-
 chunksof16([], []) :- !.
 chunksof16(Xs, Ys) :-
   length(A, 16),
@@ -63,9 +49,9 @@ chunksof16(Xs, Ys) :-
   chunksof16(B, Xs1),
   Ys = [A|Xs1].
 
-apply_xor([],    0).
-apply_xor([H|T], X) :-
-  apply_xor(T, X1), xor_dec(H, X1, X).
+apply_xor(Xs,  X) :- foldl(my_xor, Xs, 0, X).
+
+my_xor(A, B, X) :- X is A xor B.
 
 hex_dig(A, B) :-
   A < 10 -> atom_number(B, A)
@@ -99,8 +85,7 @@ day10b(B) :-
   maplist(to_hex, Xors, Hexs),
   maplist(ceros_on(2), Hexs, Hexs1),
   flatten(Hexs1, Hex),
-  atomic_list_concat(Hex, B).
-
+  atomic_list_concat(Hex, B), !.
 
 %% Reading File (formating the input)
 from_file(Path, F) :-
