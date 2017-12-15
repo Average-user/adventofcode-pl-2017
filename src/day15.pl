@@ -8,8 +8,7 @@ special_bin(_, _, 16) :- !.
 special_bin(A, B, I) :-
   MA is A mod 2, MA is B mod 2,
   X is A div 2, Y is B div 2,
-  succ(I, NI),
-  special_bin(X, Y, NI).
+  succ(I, NI), special_bin(X, Y, NI).
 
 matches_till(_, _, 0, M, M) :- !.
 matches_till(A, B, N, M, R) :-
@@ -42,10 +41,15 @@ day15b(B) :-
   generateBs(GB, 5000000, [], Bs),
   zip(As, Bs, Zipped),
   include(match, Zipped, Matches),
-  length(Matches, B).
+  length(Matches, B), !.
 
 % Formatting input.
 from_file(Path, F) :-
-  file_to_lines(Path, [A,B]),
-  atom_number(A, NA), atom_number(B, NB),
+  file_to_lines(Path, [A1,B1]),
+  atom_codes(A1, CA),
+  atom_codes(B1, CB),
+  append(_, [X,Y,Z], CA),
+  append(_, [J,K,L], CB),
+  number_codes(NA, [X,Y,Z]),
+  number_codes(NB, [J,K,L]),
   F = (NA, NB).
