@@ -1,23 +1,22 @@
+:- module(day10, [to_hex/2, ceros_on/3, to_knot/2]). % comment this if you are
+                                                     % trying this exercise
 :- use_module(tools).
 
-nth([H|_], 0, H) :- !.
-nth([_|T], N, E) :- N1 is N-1, nth(T, N1, E).
+nth1(XS, N, E) :- N1 is N mod 256, nth0(N1, XS, E).
 
-nth1(XS, N, E) :- N1 is N mod 256, nth(XS, N1, E).
+mod256(X, Y) :- Y is X mod 256.
 
-replaceIn([_|T], 0, E, [E|T]) :- !.
-replaceIn([H|T], N, E, Xs) :-
-  N1 is N-1,
-  replaceIn(T, N1, E, Xs1),
-  Xs = [H|Xs1].
+replaceAllH([],         Xs,    _, Xs).
+replaceAllH([(I,E)|ZT], [H|T], N, Ys) :-
+  succ(N, N1),
+  (I = N -> replaceAllH(ZT, T, N1, Ys1), Ys = [E|Ys1]
+          ; replaceAllH([(I,E)|ZT], T, N1, Ys1), Ys = [H|Ys1]).
 
-replaceIn1(Xs, N, E, Rs) :-
-  N1 is N mod 256, replaceIn(Xs, N1, E, Rs).
-
-replaceAll([],        []          , Xs, Xs) :- !.
-replaceAll([I|Index], [E|Elements], Xs, Rs) :-
-  replaceIn1(Xs, I, E, Xs1),
-  replaceAll(Index, Elements, Xs1, Rs).
+replaceAll(Indexes, Elements, Xs, Ys) :-
+   maplist(mod256, Indexes, NI),
+   zip(NI, Elements, Zipped),
+   sort(Zipped, SZ),
+   replaceAllH(SZ, Xs, 0, Ys).
 
 process(Xs, []         , _, _   , _ , 1, Xs) :- !.
 process(Xs, []         , I, Skip, LS, C, Rs) :-
@@ -74,9 +73,8 @@ ceros_on(N, Xs, Ys) :-
   findall(X, (member(X, Y), X = 0), R),
   append(R , Xs, Ys).
 
-day10b(B) :-
-  from_file("Inputs/day10.txt", F),
-  atom_codes(F, Codes),
+to_knot(Atom, Knot) :-
+  atom_codes(Atom, Codes),
   append(Codes, [17, 31, 73, 47, 23], Lengths),
   numlist(0,255, Xs),
   process(Xs, Lengths, 0, 0, Lengths, 64, Set256),
@@ -85,7 +83,11 @@ day10b(B) :-
   maplist(to_hex, Xors, Hexs),
   maplist(ceros_on(2), Hexs, Hexs1),
   flatten(Hexs1, Hex),
-  atomic_list_concat(Hex, B), !.
+  atomic_list_concat(Hex, Knot), !.
+
+day10b(B) :-
+  from_file("Inputs/day10.txt", F),
+  to_knot(F, B).
 
 %% Reading File (formating the input)
 from_file(Path, F) :-

@@ -1,3 +1,5 @@
+:- module(day12, [nodes_of/2, groups/4]). % comment this if you are
+                                          % trying this exercise
 :- use_module(tools).
 
 connected_to(Edges, Xs, R) :-
