@@ -1,8 +1,7 @@
-:- module(day10, [to_hex/2, ceros_on/3, to_knot/2]). % comment this if you are
-                                                     % trying this exercise
+:- module(day10, [to_knot/2]). % comment this if you are trying this exercise
 :- use_module(tools).
 
-nth1(XS, N, E) :- N1 is N mod 256, nth0(N1, XS, E).
+nth256(XS, N, E) :- N1 is N mod 256, nth0(N1, XS, E).
 
 mod256(X, Y) :- Y is X mod 256.
 
@@ -20,12 +19,11 @@ replaceAll(Indexes, Elements, Xs, Ys) :-
 
 process(Xs, []         , _, _   , _ , 1, Xs) :- !.
 process(Xs, []         , I, Skip, LS, C, Rs) :-
-  C1 is C-1,
-  process(Xs, LS, I, Skip, LS, C1, Rs).
+  C1 is C-1, process(Xs, LS, I, Skip, LS, C1, Rs).
 process(Xs, [L|Lengths], I, Skip, Ls, C, Rs) :-
   (L = 0 -> L1 = I ; L1 is (L+I-1)),
   numlist(I, L1, ToTake),
-  maplist(nth1(Xs), ToTake, Ns),
+  maplist(nth256(Xs), ToTake, Ns),
   reverse(Ns, Ns1),
   replaceAll(ToTake, Ns1, Xs, NXs),
   NSkip is Skip+1,

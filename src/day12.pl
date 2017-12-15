@@ -16,7 +16,7 @@ day12a(A) :-
 groups([],        _,     Ac, Ac) :- !.
 groups([N|Nodes], Edges, Ac, R)  :-
   connected_to(Edges, [N], Cs),
-  findall(X, (member(X, Nodes), not(member(X, Cs))), NNodes),
+  subtract(Nodes, Cs, NNodes),
   NAc is Ac+1,
   groups(NNodes, Edges, NAc, R).
 

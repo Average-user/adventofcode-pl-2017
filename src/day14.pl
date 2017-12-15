@@ -22,17 +22,15 @@ hex_dig(102, [1,1,1,1]).
 to_bin128(Atom, Bin) :-
   atom_codes(Atom, Cs), maplist(hex_dig, Cs, Bins), flatten(Bins, Bin).
 
-count_ones(X, Ones) :- include(=(1), X, Z), length(Z, Ones).
-
 ones_on_line(Atom, X) :-
   to_knot(Atom, Knot),
   to_bin128(Knot, B),
-  count_ones(B, X).
+  sum_list(B, X).
 
 day14a(A) :-
   from_file("Inputs/day14.txt", F),
   maplist(ones_on_line, F, Ones),
-  sum(Ones, A).
+  sum_list(Ones, A).
 
 get_in(Xs, (X, Y), E) :- nth0(X, Xs, A),  nth0(Y, A, E).
 
