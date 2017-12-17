@@ -11,14 +11,12 @@ run(Xs, I, T, N, M, Ys) :-
 	insert(Xs, NI, N, NXs),
  	run(NXs, NI, T, N1, M, Ys).
 
-run2(_, _, N, M, M, N) :- !.
-run2(I, T, N, C, M, O) :-
-  NI is (I + T) mod C,
-	(NI = 0 -> NN = C ; NN = N),
-	succ(C, NC),
-	succ(NI, N1),
-	run2(N1, T, NN, NC, M, O).
-		
+run2(I, _, _, N, N) :- I > 50000000, !.
+run2(I, T, C, N, M) :-
+		succ(I, NI),
+		NC is (C+T+1) mod NI,
+		(C = 0 -> run2(NI, T, NC, I, M)
+		        ; run2(NI, T, NC, N, M)).
 
 day17a(A) :-
   from_file("Inputs/day17.txt", F),
@@ -26,7 +24,7 @@ day17a(A) :-
 	append(_, [2017, A|_], Xs), !.
 
 day17b(B) :-
-  from_file("Inputs/day17.txt", F), run2(0, F, 0, 1, 50000002, B), !.
+  from_file("Inputs/day17.txt", F), run2(1, F, 0, 0, B), !.
 
 % Formating Input:
 from_file(Path, F) :-
