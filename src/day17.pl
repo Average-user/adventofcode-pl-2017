@@ -13,7 +13,7 @@ run(Xs, I, T, N, M, Ys) :-
 
 run2(I, _, _, N, N) :- I > 50000000, !.
 run2(I, T, C, N, M) :-
-		succ(I, NI),
+    succ(I, NI),
 		NC is (C+T+1) mod NI,
 		(C = 0 -> run2(NI, T, NC, I, M)
 		        ; run2(NI, T, NC, N, M)).
@@ -24,9 +24,10 @@ day17a(A) :-
 	append(_, [2017, A|_], Xs), !.
 
 day17b(B) :-
-  from_file("Inputs/day17.txt", F), run2(1, F, 0, 0, B), !.
+  from_file("Inputs/day17.txt", F),
+  run2(1, F, 0, 0, B), !.
 
 % Formating Input:
 from_file(Path, F) :-
   file_to_lines(Path, [N|_]),
-  string_to_number(N, F).  
+  string_to_number(N, F).

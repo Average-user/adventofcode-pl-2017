@@ -10,7 +10,8 @@
                   fst/2,
                   splitAt/4,
                   sum/2,
-                  to_bin/2]).
+                  to_bin/2,
+                  drop/3]).
 
 file_to_lines(Path, Lines) :-
   open(Path, read, File),
@@ -47,3 +48,6 @@ sum([H|T], N) :-
 
 to_bin(0, []) :- !.
 to_bin(N, Xs) :- A is N mod 2, B is N div 2, to_bin(B, Zs), Xs = [A|Zs].
+
+drop(Xs,    0, Xs) :- !.
+drop([_|T], N, Xs) :- succ(N1, N), drop(T, N1, Xs).
