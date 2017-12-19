@@ -2,13 +2,15 @@
 
 #### Project structure:
 For every ```src/dayX.pl``` will be a ```src/Inputs/dayX.txt``` in where the
-puzzle input would be stored. Also, some commonly used code will be stored in ```src/tools.pl```.
+puzzle input would be stored. Also, some commonly
+used code will be stored in ```src/tools.pl```.
 
 #### Usage
 In order to see what are the solutions for one puzzle follow this example:
 
 Make sure you are inside the ```src``` folder, and:
-```
+
+``` text
 src$ prolog
 ...
 ?-  [day1].
@@ -18,6 +20,7 @@ true.
 A = 1216,
 B = 1072.
 ```
+
 If you want to see how it works with your input, just replace the
 correspondent ```Inputs/dayX.txt``` with your input, following the given format.
 
@@ -26,7 +29,7 @@ correspondent ```Inputs/dayX.txt``` with your input, following the given format.
 -   [Day 5, part B](https://github.com/Average-user/adventofcode-pl-2017/blob/master/src/day5.pl).
 
 #### [License](https://github.com/Average-user/adventofcode-pl-2017/blob/master/LICENSE)
-```
+``` text
 MIT License
 
 Copyright (c) 2017 Lucas Polymeris
