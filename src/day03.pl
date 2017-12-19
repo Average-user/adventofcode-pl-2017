@@ -25,13 +25,9 @@ distanceX(N, D) :-
   index(R, Cx, Ix), Di is Ix-I+1,
   Da is RN-Di,      D is abs(Da).
 
-elem_of([H|_], 0, H) :- !.
-elem_of([_|T], N, E) :- succ(N1, N), elem_of(T, N1, E), !.
-
 get_in(Xs, (X, Y), E) :-
-  (X < 0 ; Y < 0) -> E = 0;
-  elem_of(Xs, X, Ys), 
-  elem_of(Ys, Y, E), !;
+  (X < 0 ; Y < 0) -> E = 0,! ;
+  nth0(X, Xs, L), nth0(Y, L, E), !;
   E = 0.
 
 replace([_|T], 0, E, [E|T]) :- !.
