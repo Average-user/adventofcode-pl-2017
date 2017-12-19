@@ -7,13 +7,9 @@ move(1, 0).
 
 isletter(X) :- atom_codes("ABCDEFGHIJKLMNOPQRSTUVWXYZ", L), member(X, L).
 
-elem_of([H|_], 0, H) :- !.
-elem_of([_|T], N, E) :- succ(N1, N), elem_of(T, N1, E), !.
-
 get_in(Xs, (X, Y), E) :-
   (X < 0 ; Y < 0) -> E = nil;
-  elem_of(Xs, X, Ys), 
-  elem_of(Ys, Y, E1),
+  nth0(X, Xs, Ys), nth0(Y, Ys, E1),
   (E1 = 32 -> E = nil ; E = E1),
   ! ; E = nil.
 
