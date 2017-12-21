@@ -40,18 +40,21 @@ cycle_deductions(C, R) :-
   append(_, [R|B], C),
   length([R|B], M).
 
+
+% day 16 part A solution
 day16a(A) :-
   from_file("Inputs/day16.txt", F),
   dance([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p], F, D),
   atomic_list_concat(D, A), !.
 
+% day 16 part B solution
 day16b(B) :-
   from_file("Inputs/day16.txt", F),
   Start = [a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p],
   dance_cycle(Start, F, [], Cycle),
   cycle_deductions(Cycle, R),
   atomic_list_concat(R, B), !.
-  
+
 % Formating Input.
 from_file(Path, F) :-
   file_to_lines(Path, [In|_]),

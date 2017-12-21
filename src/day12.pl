@@ -7,12 +7,6 @@ connected_to(Edges, Xs, R) :-
    -> Xs1 = [Y|Xs], connected_to(Edges, Xs1, R)
     ; R = Xs.
 
-day12a(A) :-
-  from_file("Inputs/day12.txt", F),
-  connected_to(F, [0], Connected0),
-  length(Connected0, A).
-
-
 groups([],        _,     Ac, Ac) :- !.
 groups([N|Nodes], Edges, Ac, R)  :-
   connected_to(Edges, [N], Cs),
@@ -24,6 +18,14 @@ nodes_of(Edges, Nodes) :-
   maplist(fst, Edges, F), maplist(snd, Edges, S),
   append(F, S, Ns), list_to_set(Ns, Nodes).
 
+
+% day 12 part A solution
+day12a(A) :-
+  from_file("Inputs/day12.txt", F),
+  connected_to(F, [0], Connected0),
+  length(Connected0, A).
+
+% day 12 part B solution
 day12b(B) :-
   from_file("Inputs/day12.txt", Edges),
   nodes_of(Edges, Nodes),

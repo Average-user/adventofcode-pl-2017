@@ -27,11 +27,6 @@ ones_on_line(Atom, X) :-
   to_bin128(Knot, B),
   sum_list(B, X).
 
-day14a(A) :-
-  from_file("Inputs/day14.txt", F),
-  maplist(ones_on_line, F, Ones),
-  sum_list(Ones, A).
-
 get_in(Xs, (X, Y), E) :- nth0(X, Xs, A),  nth0(Y, A, E).
 
 line_coors([],    _, _, []) :- !.
@@ -67,6 +62,13 @@ grid_edges(Grid, Edges) :-
   flatten(Edges1, Edges2),
   list_to_set(Edges2, Edges).
 
+% day 14 part A solution
+day14a(A) :-
+  from_file("Inputs/day14.txt", F),
+  maplist(ones_on_line, F, Ones),
+  sum_list(Ones, A).
+
+% day 14 part B solution
 day14b(B) :-
   from_file("Inputs/day14.txt", F),
   maplist(to_knot, F, Knots),

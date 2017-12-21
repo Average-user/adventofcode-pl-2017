@@ -32,21 +32,21 @@ get_in(Xs, (X, Y), E) :-
 
 replace([_|T], 0, E, [E|T]) :- !.
 replace([H|T], N, E, Xs)    :-
-  succ(N1, N), replace(T, N1, E, Xs1), Xs = [H|Xs1]. 
+  succ(N1, N), replace(T, N1, E, Xs1), Xs = [H|Xs1].
 
 replace_in([H|T], (0, Y), E, Xs) :- replace(H, Y, E, NH), Xs = [NH|T], !.
-replace_in([H|T], (X, Y), E, Xs) :- 
+replace_in([H|T], (X, Y), E, Xs) :-
   succ(X1, X), replace_in(T, (X1, Y), E, Xs1), Xs = [H|Xs1].
 
-add_ceros(Xs, Ys) :- append([0|Xs], [0], Ys). 
+add_ceros(Xs, Ys) :- append([0|Xs], [0], Ys).
 
 amplify(Xs, Ys, (X, Y), (NX, NY)) :-
-  length(Xs, AL), L is AL+2, 
+  length(Xs, AL), L is AL+2,
   findall(N, (between(1,L,_), N = 0), Cs),
   maplist(add_ceros, Xs, NXs),
   append([Cs|NXs], [Cs], Ys),
   NX is X+1, NY is Y+1.
-  
+
 next(right, Xs, (X, Y), (A, B), D) :-
   (A is X-1, get_in(Xs, (A, Y), N), N =:= 0, B = Y, D = up), !;
   B is Y+1, A = X, D = right.
@@ -71,20 +71,22 @@ count_neighbors(Xs, (X, Y), N) :-
 run(N, Xs, C, Dir, CR, Ac, R) :-
   succ(Ac, NAc),  ring(Ac, Rn),
   (Rn = CR -> EXs = Xs, C1 = C; amplify(Xs, EXs, C, C1)),
-  next(Dir, EXs, C1, NC, ND), 
+  next(Dir, EXs, C1, NC, ND),
   count_neighbors(EXs, NC, V),
   (V > N -> R is V ;  replace_in(EXs, NC, V, NXs),
                       run(N, NXs, NC, ND, Rn, NAc, R)).
 
-day03a(A) :- 
+% Day 3 part A solution
+day03a(A) :-
   from_file("Inputs/day3.txt", N),
   distanceX(N, X),
   distanceY(N, Y),
   A is X+Y.
 
+% Day3 part B solution
 day03b(B) :-
   from_file("Inputs/day3.txt", N),
-  run(N, [[0,0,0],[0,1,1],[0,0,0]], (1,2), right, 2, 3, B). 
+  run(N, [[0,0,0],[0,1,1],[0,0,0]], (1,2), right, 2, 3, B).
 
 %% Reading File (formating the input)
 from_file(Path, F) :-

@@ -48,7 +48,6 @@ next(right, P, Coor, Xs, C, E, Di) :-
   (e(E, C) = D -> Di = down;
    e(E, C) = R -> Di = right;
    e(E, C) = U -> Di = up).
-  
 
 find_letters(Xs, P, D, C, Ls, Fs, A, B) :-
   Ls = [] -> A = Fs, B = 1;
@@ -57,18 +56,21 @@ find_letters(Xs, P, D, C, Ls, Fs, A, B) :-
   (member(E, Ls) -> select(E, Ls, NLs), NFs = [E|Fs] 
                   ; NLs = Ls, NFs = Fs),
   find_letters(Xs, NP, ND, NC, NLs, NFs, A, B1), B is B1+1.
-  
 
+
+% day 19 part A solution
 day19a(A) :-
   from_file("Inputs/day19.txt", (Xs, Ls, Y)),
   find_letters(Xs, (0,0), down, (0, Y), Ls, [], R, _),
   reverse(R, RR), atom_codes(A, RR), !.
 
+% day 19 part B solution
 day19b(B) :-
   from_file("Inputs/day19.txt", (Xs, Ls, Y)),
   find_letters(Xs, (0,0), down, (0, Y), Ls, [], _, B), !.
 
 
+% formating input
 from_file(Path, F) :-
   file_to_lines(Path, Lines),
   maplist(atom_codes, Lines, Lines1),

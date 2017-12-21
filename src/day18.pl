@@ -50,15 +50,17 @@ coordinate(P, Vs1, Vs2, Ix1, Ix2, Q1, Q2, R) :-
     coordinate(P, NVs1, NVs2, NIx1, NIx2, FQ1, FQ2, AR), R is AR+Z).
 
 
+% day 18 part A solution
 day18a(A) :-
   from_file("Inputs/day18.txt", (Vs, Ins)),
   run(Ins, 0, Vs, [], [A|_]).
 
+% day 18 part B solution
 day18b(B) :-
   from_file("Inputs/day18.txt", (Vs, Ins)),
   member((p, X), Vs), select((p, X), Vs, NVs), Vs1 = [(p, 1)|NVs],
   coordinate(Ins, Vs, Vs1, 0, 0, [], [], B), !.
-  
+
 % Formating Input:
 from_file(Path, F) :-
   file_to_lines(Path, Lines),
@@ -69,7 +71,7 @@ from_file(Path, F) :-
   maplist(line_to_in, Lines, Ins),
   exclude(=(nil), Ins, Ins1),
   F = (Vs3, Ins1).
-  
+
 line_to_in(S, I) :-
   split_string(S, " ", " ", S1),
   maplist(string_to_atom, S1, As),
@@ -85,7 +87,7 @@ line_to_in(S, I) :-
 val(X, V) :- atom_number(X, V), ! ; V = X.
 
 set0(X, (X, 0)).
-  
+
 vars([],     [])   :- !.
 vars([H|Xs], Vars) :-
   vars(Xs, Vars1),

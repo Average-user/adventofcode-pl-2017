@@ -40,6 +40,7 @@ run2(Vars, [E|Exps], AC, RVars, RAC) :-
   NAC = [M|AC],
   run2(NVars, Exps, NAC, RVars, RAC).
 
+
 % Day 8.A solution
 day08a(A) :-
   from_file("Inputs/day8.txt", F),

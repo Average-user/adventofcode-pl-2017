@@ -18,11 +18,14 @@ run2(I, T, C, N, M) :-
 		(C = 0 -> run2(NI, T, NC, I, M)
 		        ; run2(NI, T, NC, N, M)).
 
+
+% day 17 part A solution
 day17a(A) :-
   from_file("Inputs/day17.txt", F),
 	run([0], 0, F, 1, 2018, Xs),
 	append(_, [2017, A|_], Xs), !.
 
+% day 17 part B solution
 day17b(B) :-
   from_file("Inputs/day17.txt", F),
   run2(1, F, 0, 0, B), !.

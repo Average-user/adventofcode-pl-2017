@@ -15,12 +15,6 @@ distance([],    X,  X)  :- !.
 distance([D|T], X,  Vs) :-
   change_coor(D, X, NX), distance(T, NX, Vs).
 
-day11a(A) :-
-  from_file("Inputs/day11.txt", F),
-  distance(F, v(0,0,0), v(X,Y,Z)),
-  A is (abs(X)+abs(Y)+abs(Z)) div 2.
-
-
 maxdis([],    _,          Ac, Ac) :- !.
 maxdis([D|T], v(X, Y, Z), Ac, Vs) :-
   change_coor(D, v(X, Y, Z), v(NX, NY, NZ)),
@@ -28,6 +22,14 @@ maxdis([D|T], v(X, Y, Z), Ac, Vs) :-
   Ac1 = [AE|Ac],
   maxdis(T, v(NX, NY, NZ), Ac1, Vs), !.
 
+
+% day 11 part A solution
+day11a(A) :-
+  from_file("Inputs/day11.txt", F),
+  distance(F, v(0,0,0), v(X,Y,Z)),
+  A is (abs(X)+abs(Y)+abs(Z)) div 2.
+
+% day 11 part B solution
 day11b(B) :-
   from_file("Inputs/day11.txt", F),
   maxdis(F, v(0,0,0), [], Ac),

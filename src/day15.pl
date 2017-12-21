@@ -16,11 +16,6 @@ matches_till(A, B, N, M, R) :-
   (special_bin(A, B, 0) -> succ(M, M1), matches_till(NA, NB, N1, M1, R)
                          ; matches_till(NA, NB, N1, M, R)).
 
-day15a(A) :-
-  from_file("Inputs/day15.txt", (GA, GB)),
-  matches_till(GA, GB, 40000001, 0, A).
-
-
 generateAs(_, 0, Ac, Ac) :- !.
 generateAs(A, N, Ac, Xs) :-
   newA(A, NA), succ(N1, N),
@@ -35,6 +30,12 @@ generateBs(B, N, Ac, Xs) :-
   (0 is NB mod 8 -> NAc = [NB|Ac], generateBs(NB, N1, NAc, Xs)
                   ; generateBs(NB, N, Ac, Xs)).
 
+% day 15 part A solution
+day15a(A) :-
+  from_file("Inputs/day15.txt", (GA, GB)),
+  matches_till(GA, GB, 40000001, 0, A).
+
+% day 15 part B solution
 day15b(B) :-
   from_file("Inputs/day15.txt", (GA, GB)),
   generateAs(GA, 5000000, [], As),

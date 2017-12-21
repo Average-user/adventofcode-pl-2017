@@ -1,8 +1,7 @@
 :- use_module(tools).
 
 max(XS, (I, M)) :-
-  member((I, M), XS),
-  forall(member((_, X), XS), M >= X), !.
+  member((I, M), XS), forall(member((_, X), XS), M >= X), !.
 
 distributeH([]        , N, [], N) :- !.
 distributeH(XS        , 0, XS, 0) :- !.
@@ -33,15 +32,15 @@ loop(XS, XSS, R) :-
 
 run(X, S) :- zip_index(X, XS),  loop(XS, [], S).
 
+dropWhileB([X|T], X, [X|T]) :- !.
+dropWhileB([_|T], X, XS) :- dropWhileB(T, X, XS).
+
+
 % Day 6.A solution
 day06a(A) :-
   from_file("Inputs/day6.txt", F),
   run(F, X),
   length(X, A).
-
-
-dropWhileB([X|T], X, [X|T]) :- !.
-dropWhileB([_|T], X, XS) :- dropWhileB(T, X, XS).
 
 % Day 6.B solution
 day06b(B) :-

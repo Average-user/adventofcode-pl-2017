@@ -40,15 +40,6 @@ sum_gps(Xs, A, S) :-
           ; A1 is A+C,
             sum_gps(Nxs, A1, S)).
 
-% Day 9.A solution
-day09a(A) :-
-  from_file("Inputs/day9.txt", F),
-  ignore_stuff(F, Is),
-  erase_garbage(Is, f, Gs),
-  clean(Gs, Cs),
-  sum_gps(Cs, 0, A), !.
-
-
 count_garbage([],    _, C, C).
 count_garbage([H|T], f, C, S) :-
   gopened(H) -> count_garbage(T, t, C, S)
@@ -57,6 +48,16 @@ count_garbage([H|T], t, C, S) :-
   gclosed(H) -> count_garbage(T, f, C, S)
               ; C1 is C+1,
                 count_garbage(T, t, C1, S).
+
+
+% Day 9.A solution
+day09a(A) :-
+  from_file("Inputs/day9.txt", F),
+  ignore_stuff(F, Is),
+  erase_garbage(Is, f, Gs),
+  clean(Gs, Cs),
+  sum_gps(Cs, 0, A), !.
+
 
 % Day 9.B solution.
 day09b(B) :-

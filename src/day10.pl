@@ -30,15 +30,6 @@ process(Xs, [L|Lengths], I, Skip, Ls, C, Rs) :-
   NI    is Skip+I+L,
   process(NXs, Lengths, NI, NSkip, Ls, C, Rs).
 
-day10a(A) :-
-  from_file("Inputs/day10.txt", F1),
-  split_string(F1, ",", ",", F2),
-  maplist(string_to_number, F2, F),
-  numlist(0,255, Xs),
-  process(Xs, F, 0, 0, F, 1, [X,Y|_]),
-  A is X*Y.
-
-
 chunksof16([], []) :- !.
 chunksof16(Xs, Ys) :-
   length(A, 16),
@@ -83,6 +74,17 @@ to_knot(Atom, Knot) :-
   flatten(Hexs1, Hex),
   atomic_list_concat(Hex, Knot), !.
 
+
+% day 10 part A solution
+day10a(A) :-
+  from_file("Inputs/day10.txt", F1),
+  split_string(F1, ",", ",", F2),
+  maplist(string_to_number, F2, F),
+  numlist(0,255, Xs),
+  process(Xs, F, 0, 0, F, 1, [X,Y|_]),
+  A is X*Y.
+
+% day 10 part B solution
 day10b(B) :-
   from_file("Inputs/day10.txt", F),
   to_knot(F, B).

@@ -11,10 +11,6 @@ find_bottom(XS, Bottom) :-
   member(p(Bottom, _, _), XS),
   not(member(Bottom, SP)).
 
-% Day 7.A solution
-day07a(A) :- from_file("Inputs/day7.txt", F), find_bottom(F, A), !.
-
-
 total_weight(XS, Name, S) :-
   member(p(Name, N1, Programs), XS),
   (Programs = nil -> S = N1 ;
@@ -55,6 +51,10 @@ new_weight(XS, Weight) :-
   D is W2-W1,
   member(p(P, N, _), XS),
   Weight is N+D.
+
+
+% Day 7.A solution
+day07a(A) :- from_file("Inputs/day7.txt", F), find_bottom(F, A), !.
 
 % Day 7.B solution
 day07b(B) :- from_file("Inputs/day7.txt", F), new_weight(F, B), !.
