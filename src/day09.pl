@@ -52,7 +52,7 @@ count_garbage([H|T], t, C, S) :-
 
 % Day 9.A solution
 day09a(A) :-
-  from_file("Inputs/day9.txt", F),
+  from_file("Inputs/day09.txt", F),
   ignore_stuff(F, Is),
   erase_garbage(Is, f, Gs),
   clean(Gs, Cs),
@@ -61,7 +61,7 @@ day09a(A) :-
 
 % Day 9.B solution.
 day09b(B) :-
-  from_file("Inputs/day9.txt", F),
+  from_file("Inputs/day09.txt", F),
   ignore_stuff(F, Is),
   count_garbage(Is, f, 0, B), !.
 

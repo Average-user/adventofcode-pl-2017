@@ -25,7 +25,7 @@ run_exp(Vars, i(A, Fun, B, C, Cond, D), NVars) :-
   satisfy(Vars, C, Cond, D)
   -> apply_fun(Vars, A, Fun, B, R),
      insert_val(Vars, A, R, NVars)
-  ;  NVars = Vars.
+   ; NVars = Vars.
 
 run(Vars, []      , Vars)  :- !.
 run(Vars, [E|Exps], RVars) :-
@@ -43,7 +43,7 @@ run2(Vars, [E|Exps], AC, RVars, RAC) :-
 
 % Day 8.A solution
 day08a(A) :-
-  from_file("Inputs/day8.txt", F),
+  from_file("Inputs/day08.txt", F),
   all_vars(F, Vars),
   run(Vars, F, NVars),
   maplist(snd, NVars, Ns),
@@ -51,7 +51,7 @@ day08a(A) :-
 
 % Day 8.B solution
 day08b(B) :-
-  from_file("Inputs/day8.txt", F),
+  from_file("Inputs/day08.txt", F),
   all_vars(F, Vars),
   run2(Vars, F, [], _, AC),
   max_list(AC, B), !.

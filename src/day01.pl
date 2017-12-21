@@ -19,7 +19,8 @@ containsS(XS, I) :-
   L2 is L div 2,
   I2 is I+L2,
   elemIndex(I2, XS, E2),
-  elemIndex(I, XS, E), E = E2.
+  elemIndex(I, XS, E),
+  E = E2.
 
 sum2(XS, S) :-
   length(XS, L),
@@ -31,10 +32,10 @@ sum2(XS, S) :-
 
 
 % Day 1.A solution
-day01a(S) :- from_file("Inputs/day1.txt", F), sumA(F, S), !.
+day01a(S) :- from_file("Inputs/day01.txt", F), sumA(F, S), !.
 
 % Day 1.B solution
-day01b(S) :- from_file("Inputs/day1.txt", F), sum2(F, S), !.
+day01b(S) :- from_file("Inputs/day01.txt", F), sum2(F, S), !.
 
 %% Reading File (formating the input)
 from_file(Path, F) :-

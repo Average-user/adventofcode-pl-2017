@@ -54,10 +54,10 @@ new_weight(XS, Weight) :-
 
 
 % Day 7.A solution
-day07a(A) :- from_file("Inputs/day7.txt", F), find_bottom(F, A), !.
+day07a(A) :- from_file("Inputs/day07.txt", F), find_bottom(F, A), !.
 
 % Day 7.B solution
-day07b(B) :- from_file("Inputs/day7.txt", F), new_weight(F, B), !.
+day07b(B) :- from_file("Inputs/day07.txt", F), new_weight(F, B), !.
 
 %% Reading File (formating the input)
 from_file(Path, F) :-

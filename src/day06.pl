@@ -38,19 +38,19 @@ dropWhileB([_|T], X, XS) :- dropWhileB(T, X, XS).
 
 % Day 6.A solution
 day06a(A) :-
-  from_file("Inputs/day6.txt", F),
+  from_file("Inputs/day06.txt", F),
   run(F, X),
   length(X, A).
 
 % Day 6.B solution
 day06b(B) :-
-  from_file("Inputs/day6.txt", F),
+  from_file("Inputs/day06.txt", F),
   run(F, [H|T]),
   reverse(T, X),
   dropWhileB(X, H, Cycle),
   length(Cycle, B).
 
-% "Input/day6.txt"
+
 %% Reading File (formating the input)
 from_file(Path, F) :-
   file_to_lines(Path, [X|_]),

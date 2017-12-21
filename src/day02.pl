@@ -11,11 +11,11 @@ evenlyDiv(XS, R) :-
 
 
 % Day 2.A solution
-day02a(S) :- from_file("Inputs/day2.txt", A), maplist(dif, A, B), sum(B, S), !.
+day02a(S) :- from_file("Inputs/day02.txt", A), maplist(dif, A, B), sum(B, S), !.
 
 % Day 2.B solution.
 day02b(S) :-
-  from_file("Inputs/day2.txt", A),
+  from_file("Inputs/day02.txt", A),
   maplist(evenlyDiv, A, B),
   sum_list(B, S), !.
 

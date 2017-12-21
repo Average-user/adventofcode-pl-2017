@@ -5,10 +5,10 @@
 take_drop(X, Xs, Ts, Ds) :- append(Ts, Ds, Xs), length(Ts, X), !.
 
 divide(Xs, Ys, N) :- length(Xs, L), L < N, Ys = [Xs], !.
-divide(Xs, Ys, N) :- 
+divide(Xs, Ys, N) :-
   take_drop(N, Xs, Ts, Ds),
   divide(Ds, Ys1, N),
-  Ys = [Ts|Ys1].  
+  Ys = [Ts|Ys1].
 
 modify(P, [X|Xs], (0, Y), NXs, E) :- modifyX(P, X, Y, NX, E), NXs = [NX|Xs].
 modify(P, [H|T],  (X, Y), NXs, E) :-
@@ -42,10 +42,10 @@ changesB( XS, I, AC, Z) :-
 /* | I implemented a new solution that instead of take 5 minutes to run part A,
    | it just takes 15 seconds. But isn't enough for part B, I think thats
    | because it uses too much memory                                          */
-day05a(A) :- from_file("Inputs/day5.txt", I),
+day05a(A) :- from_file("Inputs/day05.txt", I),
   divide(I, Xs, 60), changesA(Xs, 0, 1, A).
 
-day05b(B) :- from_file("Inputs/day5.txt", I),
+day05b(B) :- from_file("Inputs/day05.txt", I),
   divide(I, Xs, 60), changesB(Xs, 0, 1, B).
 
 

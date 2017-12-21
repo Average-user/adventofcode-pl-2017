@@ -78,14 +78,14 @@ run(N, Xs, C, Dir, CR, Ac, R) :-
 
 % Day 3 part A solution
 day03a(A) :-
-  from_file("Inputs/day3.txt", N),
+  from_file("Inputs/day03.txt", N),
   distanceX(N, X),
   distanceY(N, Y),
   A is X+Y.
 
 % Day3 part B solution
 day03b(B) :-
-  from_file("Inputs/day3.txt", N),
+  from_file("Inputs/day03.txt", N),
   run(N, [[0,0,0],[0,1,1],[0,0,0]], (1,2), right, 2, 3, B).
 
 %% Reading File (formating the input)
