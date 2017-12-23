@@ -65,8 +65,7 @@ change(2, Xs, Coor, Dir, Nxs, Dir, t) :-
 change(3, Xs, Coor, Dir, Nxs, Ndir, f) :-
   replace_in(Xs, Coor, 0, Nxs), reverse(Dir, Ndir).
 
-
-run2(_,   _,    _,  0, C, C)  :- !.
+run2(_,   _,    _,  0, C, C) :- !.
 run2(Xs, Coor, Dir, N, C, R) :-
   get_in(Xs, Coor, N),
   change(N, Xs, Coor, Dir, Xs1, Ndir, B),

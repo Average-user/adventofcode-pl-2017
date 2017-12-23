@@ -13,7 +13,7 @@ Make sure you are inside the ```src``` folder, and:
 ``` text
 src$ prolog
 ...
-?-  [day1].
+?-  [day01].
 true.
 
 ?- day01a(A), day01b(B).
@@ -25,7 +25,8 @@ If you want to see how it works with your input, just replace the
 correspondent ```Inputs/dayX.txt``` with your input, following the given format.
 
 #### Missing Stuff
--   [Day 5, part B](https://github.com/Average-user/adventofcode-pl-2017/blob/master/src/day05.pl).
+-   [Day 05, part B](https://github.com/Average-user/adventofcode-pl-2017/blob/master/src/day05.pl).
+-   [Day 22, part B](https://github.com/Average-user/adventofcode-pl-2017/blob/master/src/day22.pl).
 
 #### [License](https://github.com/Average-user/adventofcode-pl-2017/blob/master/LICENSE)
 ``` text
